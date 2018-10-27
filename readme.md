@@ -3,7 +3,7 @@
 This package seeks to help php developers implement the various Mpesa APIs without much hustle. It is based on the REST API whose documentation is available on http://developer.safaricom.co.ke.
  
  **Installation using composer**<br>
- `composer require safaricom/mpesa`<br>
+ `composer require ivantoz/mpesa dev-master`<br>
  
  
  **Configuration**<br>
@@ -11,7 +11,7 @@ This package seeks to help php developers implement the various Mpesa APIs witho
  `MPESA_CONSUMER_KEY= [consumer key]` <br>
  `MPESA_CONSUMER_SECRET=[consumer secret]`<br>
  `MPESA_ENV=[live or sandbox]`<br>
- For Laravel users, open the Config/App.php file and add `\Safaricom\Mpesa\MpesaServiceProvider::class` under providers and ` 'Mpesa'=> \Safaricom\Mpesa\MpesaServiceProvider::class` under aliases.
+ For Laravel users, open the Config/App.php file and add `\Ivantoz\Mpesa\MpesaServiceProvider::class` under providers and ` 'Mpesa'=> \Ivantoz\Mpesa\MpesaServiceProvider::class` under aliases.
   
   _Remember to edit the consumer_key and consumer_secret values appropriately when switching between sandbox and live_
 
@@ -24,7 +24,7 @@ This package seeks to help php developers implement the various Mpesa APIs witho
  
  This creates transaction between an M-Pesa short code to a phone number registered on M-Pesa.
  
-`$mpesa= new \Safaricom\Mpesa\Mpesa();`
+`$mpesa= new \Ivantoz\Mpesa\Mpesa();`
 
 `$b2cTransaction=$mpesa->b2c($InitiatorName, $SecurityCredential, $CommandID, $Amount, $PartyA, $PartyB, $Remarks, $QueueTimeOutURL, $ResultURL, $Occasion);`
 
@@ -34,7 +34,7 @@ This package seeks to help php developers implement the various Mpesa APIs witho
  
 This is used to enquire the balance on an M-Pesa BuyGoods (Till Number)
 
-`$mpesa= new \Safaricom\Mpesa\Mpesa();`
+`$mpesa= new \Ivantoz\Mpesa\Mpesa();`
 
 `$balanceInquiry=$mpesa->accountBalance($CommandID, $Initiator, $SecurityCredential, $PartyA, $IdentifierType, $Remarks, $QueueTimeOutURL, $ResultURL);`
 
@@ -43,7 +43,7 @@ This is used to enquire the balance on an M-Pesa BuyGoods (Till Number)
 **Transaction Status Request**
 This is used to check the status of transaction. 
 
-`$mpesa= new \Safaricom\Mpesa\Mpesa();`
+`$mpesa= new \Ivantoz\Mpesa\Mpesa();`
 
 `$trasactionStatus=$mpesa->transactionStatus($Initiator, $SecurityCredential, $CommandID, $TransactionID, $PartyA, $IdentifierType, $ResultURL, $QueueTimeOutURL, $Remarks, $Occasion);`
 
@@ -53,7 +53,7 @@ This is used to check the status of transaction.
 
 This is used to transfer funds between two companies.
 
-`$mpesa= new \Safaricom\Mpesa\Mpesa();`
+`$mpesa= new \Ivantoz\Mpesa\Mpesa();`
 
 `$b2bTransaction=$mpesa->b2b($ShortCode, $CommandID, $Amount, $Msisdn, $BillRefNumber );`
 
@@ -64,7 +64,7 @@ This is used to transfer funds between two companies.
 This is used to Simulate transfer of funds between a customer and business.
 
 
-`$mpesa= new \Safaricom\Mpesa\Mpesa();`
+`$mpesa= new \Ivantoz\Mpesa\Mpesa();`
 
 `$b2bTransaction=$mpesa->c2b($ShortCode, $CommandID, $Amount, $Msisdn, $BillRefNumber );`
 
@@ -76,7 +76,7 @@ _Also important to note is that you should have registered validation and confir
 
 This is used to initiate online payment on behalf of a customer.
 
-`$mpesa= new \Safaricom\Mpesa\Mpesa();`
+`$mpesa= new \Ivantoz\Mpesa\Mpesa();`
 
 `$stkPushSimulation=$mpesa->STKPushSimulation($BusinessShortCode, $LipaNaMpesaPasskey, $TransactionType, $Amount, $PartyA, $PartyB, $PhoneNumber, $CallBackURL, $AccountReference, $TransactionDesc, $Remarks);`
 
@@ -86,7 +86,7 @@ This is used to initiate online payment on behalf of a customer.
 
  This is used to check the status of a Lipa Na M-Pesa Online Payment.
  
-`$mpesa= new \Safaricom\Mpesa\Mpesa();`
+`$mpesa= new \Ivantoz\Mpesa\Mpesa();`
 
 `$STKPushRequestStatus=$mpesa->STKPushQuery($checkoutRequestID,$businessShortCode,$password,$timestamp);`
 
@@ -99,21 +99,21 @@ M-Pesa APIs are asynchronous. When a valid M-Pesa API request is received by the
 **Obtaining post data from callbacks**
  This is used to get post data from callback in json format. The data can be decoded and stored in a database.
  
- `$mpesa= new \Safaricom\Mpesa\Mpesa();`
+ `$mpesa= new \Ivantoz\Mpesa\Mpesa();`
  
  `$callbackData=$mpesa->getDataFromCallback();`
   
   **Finishing a transaction**
   After obtaining the Post data from the callbacks, use this at the end of your callback routes to complete the transaction
   
-  `$mpesa= new \Safaricom\Mpesa\Mpesa();`
+  `$mpesa= new \Ivantoz\Mpesa\Mpesa();`
   
   `$callbackData=$mpesa->finishTransaction();`
 
 
   If validation fails, pass `false` to `finishTransaction()`
 
-  `$mpesa= new \Safaricom\Mpesa\Mpesa();`
+  `$mpesa= new \Ivantoz\Mpesa\Mpesa();`
   
   `$callbackData=$mpesa->finishTransaction(false);`
 
