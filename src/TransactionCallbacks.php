@@ -1,18 +1,18 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: MNANDWA
+ * User: Ivantoz
  * Date: 10/19/2017
  * Time: 4:23 PM
  */
 
-namespace safaricom\Mpesa;
+namespace ivantoz\Mpesa;
 
 
 /**
  * Class TransactionCallbacks
  * This class contains functions that will be used to obtain data from Mpesa callbacks
- * @package safaricom\Mpesa
+ * @package ivantoz\Mpesa
  */
 class TransactionCallbacks
 {
@@ -39,8 +39,8 @@ class TransactionCallbacks
 
 
         $result=[
-          "resultCode"=>$resultCode,
-          "resultDesc"=>$resultDesc,
+            "resultCode"=>$resultCode,
+            "resultDesc"=>$resultDesc,
             "originatorConversationID"=>$originatorConversationID,
             "conversationID"=>$conversationID,
             "transactionID"=>$transactionID,
@@ -62,37 +62,37 @@ class TransactionCallbacks
      * @return string
      */
     public static function processB2CRequestCallback(){
-    $callbackJSONData=file_get_contents('php://input');
-    $callbackData=json_decode($callbackJSONData);
-    $resultCode=$callbackData->Result->ResultCode;
-    $resultDesc=$callbackData->Result->ResultDesc;
-    $originatorConversationID=$callbackData->Result->OriginatorConversationID;
-    $conversationID=$callbackData->Result->ConversationID;
-    $transactionID=$callbackData->Result->TransactionID;
-    $initiatorAccountCurrentBalance=$callbackData->Result->ResultParameters->ResultParameter[0]->Value;
-    $debitAccountCurrentBalance=$callbackData->Result->ResultParameters->ResultParameter[1]->Value;
-    $amount=$callbackData->Result->ResultParameters->ResultParameter[2]->Value;
-    $debitPartyAffectedAccountBalance=$callbackData->Result->ResultParameters->ResultParameter[3]->Value;
-    $transCompletedTime=$callbackData->Result->ResultParameters->ResultParameter[4]->Value;
-    $debitPartyCharges=$callbackData->Result->ResultParameters->ResultParameter[5]->Value;
-    $receiverPartyPublicName=$callbackData->Result->ResultParameters->ResultParameter[6]->Value;
-    $currency=$callbackData->Result->ResultParameters->ResultParameter[7]->Value;
+        $callbackJSONData=file_get_contents('php://input');
+        $callbackData=json_decode($callbackJSONData);
+        $resultCode=$callbackData->Result->ResultCode;
+        $resultDesc=$callbackData->Result->ResultDesc;
+        $originatorConversationID=$callbackData->Result->OriginatorConversationID;
+        $conversationID=$callbackData->Result->ConversationID;
+        $transactionID=$callbackData->Result->TransactionID;
+        $initiatorAccountCurrentBalance=$callbackData->Result->ResultParameters->ResultParameter[0]->Value;
+        $debitAccountCurrentBalance=$callbackData->Result->ResultParameters->ResultParameter[1]->Value;
+        $amount=$callbackData->Result->ResultParameters->ResultParameter[2]->Value;
+        $debitPartyAffectedAccountBalance=$callbackData->Result->ResultParameters->ResultParameter[3]->Value;
+        $transCompletedTime=$callbackData->Result->ResultParameters->ResultParameter[4]->Value;
+        $debitPartyCharges=$callbackData->Result->ResultParameters->ResultParameter[5]->Value;
+        $receiverPartyPublicName=$callbackData->Result->ResultParameters->ResultParameter[6]->Value;
+        $currency=$callbackData->Result->ResultParameters->ResultParameter[7]->Value;
 
-    $result=[
-        "resultCode"=>$resultCode,
-        "resultDesc"=>$resultDesc,
-        "originatorConversationID"=>$originatorConversationID,
-        "conversationID"=>$conversationID,
-        "transactionID"=>$transactionID,
-        "initiatorAccountCurrentBalance"=>$initiatorAccountCurrentBalance,
-        "debitAccountCurrentBalance"=>$debitAccountCurrentBalance,
-        "amount"=>$amount,
-        "debitPartyAffectedAccountBalance"=>$debitPartyAffectedAccountBalance,
-        "transCompletedTime"=>$transCompletedTime,
-        "debitPartyCharges"=>$debitPartyCharges,
-        "receiverPartyPublicName"=>$receiverPartyPublicName,
-        "currency"=>$currency
-    ];
+        $result=[
+            "resultCode"=>$resultCode,
+            "resultDesc"=>$resultDesc,
+            "originatorConversationID"=>$originatorConversationID,
+            "conversationID"=>$conversationID,
+            "transactionID"=>$transactionID,
+            "initiatorAccountCurrentBalance"=>$initiatorAccountCurrentBalance,
+            "debitAccountCurrentBalance"=>$debitAccountCurrentBalance,
+            "amount"=>$amount,
+            "debitPartyAffectedAccountBalance"=>$debitPartyAffectedAccountBalance,
+            "transCompletedTime"=>$transCompletedTime,
+            "debitPartyCharges"=>$debitPartyCharges,
+            "receiverPartyPublicName"=>$receiverPartyPublicName,
+            "currency"=>$currency
+        ];
 
 
         return json_encode($result);
@@ -162,19 +162,19 @@ class TransactionCallbacks
         $lastName=$callbackData->LastName;
 
         $result=[
-            $transTime=>$transTime,
-            $transAmount=>$transAmount,
-            $businessShortCode=>$businessShortCode,
-            $billRefNumber=>$billRefNumber,
-            $invoiceNumber=>$invoiceNumber,
-            $orgAccountBalance=>$orgAccountBalance,
-            $thirdPartyTransID=>$thirdPartyTransID,
-            $MSISDN=>$MSISDN,
-            $firstName=>$firstName,
-            $lastName=>$lastName,
-            $middleName=>$middleName,
-            $transID=>$transID,
-            $transactionType=>$transactionType
+            "transTime"=>$transTime,
+            "transAmount"=>$transAmount,
+            "businessShortCode"=>$businessShortCode,
+            "billRefNumber"=>$billRefNumber,
+            "invoiceNumber"=>$invoiceNumber,
+            "orgAccountBalance"=>$orgAccountBalance,
+            "thirdPartyTransID"=>$thirdPartyTransID,
+            "MSISDN"=>$MSISDN,
+            "firstName"=>$firstName,
+            "lastName"=>$lastName,
+            "middleName"=>$middleName,
+            "transID"=>$transID,
+            "transactionType"=>$transactionType
 
         ];
 
@@ -198,14 +198,14 @@ class TransactionCallbacks
         $BOCompletedTime=$callbackData->Result->ResultParameters->ResultParameter[1]->Value;
 
         $result=[
-          "resultDesc"=>$resultDesc,
-          "resultCode"=>$resultCode,
-          "originatorConversationID"=>$originatorConversationID,
-          "conversationID"=>$conversationID,
-          "transactionID"=>$transactionID,
-          "accountBalance"=>$accountBalance,
-          "BOCompletedTime"=>$BOCompletedTime,
-          "resultType"=>$resultType
+            "resultDesc"=>$resultDesc,
+            "resultCode"=>$resultCode,
+            "originatorConversationID"=>$originatorConversationID,
+            "conversationID"=>$conversationID,
+            "transactionID"=>$transactionID,
+            "accountBalance"=>$accountBalance,
+            "BOCompletedTime"=>$BOCompletedTime,
+            "resultType"=>$resultType
         ];
 
         return json_encode($result);
@@ -228,12 +228,12 @@ class TransactionCallbacks
         $transactionID=$callbackData->Result->TransactionID;
 
         $result=[
-          "resultType"=>$resultType,
-          "resultCode"=>$resultCode,
-          "resultDesc"=>$resultDesc,
-          "conversationID"=>$conversationID,
-          "transactionID"=>$transactionID,
-          "originatorConversationID"=>$originatorConversationID
+            "resultType"=>$resultType,
+            "resultCode"=>$resultCode,
+            "resultDesc"=>$resultDesc,
+            "conversationID"=>$conversationID,
+            "transactionID"=>$transactionID,
+            "originatorConversationID"=>$originatorConversationID
         ];
 
         return json_encode($result);
@@ -254,7 +254,7 @@ class TransactionCallbacks
 
         $amount=$callbackData->stkCallback->Body->CallbackMetadata->Item[0]->Value;
         $mpesaReceiptNumber=$callbackData->Body->stkCallback->CallbackMetadata->Item[1]->Value;
-        $balance=$callbackData->stkCallback->Body->CallbackMetadata->Item[2]->Value;
+        $balance=$callbackData->stkCallback->Body->CallbackMetadata->Item[2]->Value || null;
         $b2CUtilityAccountAvailableFunds=$callbackData->Body->stkCallback->CallbackMetadata->Item[3]->Value;
         $transactionDate=$callbackData->Body->stkCallback->CallbackMetadata->Item[4]->Value;
         $phoneNumber=$callbackData->Body->stkCallback->CallbackMetadata->Item[5]->Value;

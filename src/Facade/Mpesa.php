@@ -1,11 +1,11 @@
 <?php
-namespace Safaricom\Mpesa\Facade;
+namespace Ivantoz\Mpesa\Facade;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
  * Class Mpesa
- * @package Safaricom\Mpesa\Facade
+ * @package Ivantoz\Mpesa\Facade
  */
 class Mpesa extends Facade
 {

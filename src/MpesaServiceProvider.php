@@ -1,12 +1,12 @@
 <?php
 
-namespace Safaricom\Mpesa;
+namespace Ivantoz\Mpesa;
 
 use Illuminate\Support\ServiceProvider;
 
 /**
  * Class MpesaServiceProvider
- * @package Safaricom\Mpesa
+ * @package Ivantoz\Mpesa
  */
 class MpesaServiceProvider extends ServiceProvider
 {

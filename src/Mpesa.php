@@ -1,16 +1,16 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: moses
+ * User: Ivan
  * Date: 15/10/17
  * Time: 4:59 PM
  */
-namespace Safaricom\Mpesa;
+namespace Ivantoz\Mpesa;
 
 
 /**
  * Class Mpesa
- * @package Safaricom\Mpesa
+ * @package Ivantoz\Mpesa
  */
 class Mpesa
 {

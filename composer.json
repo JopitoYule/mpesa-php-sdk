@@ -1,5 +1,5 @@
 {
-  "name": "safaricom/mpesa",
+  "name": "ivantoz/mpesa",
   "description": "A PHP package for Mpesa API",
   "type": "package",
  "minimum-stability": "dev", 
@@ -10,14 +10,14 @@
   "license": "mit",
   "authors": [
     {
-      "name": "Moses Nandwa",
-      "email": "mnandwa@safaricom.co.ke"
+      "name": "Ivan Kipyegon",
+      "email": "ivankp1@gmail.com"
     }
   ],
  
   "autoload": {
     "psr-4": {
-      "Safaricom\\Mpesa\\": "src/"
+      "Ivantoz\\Mpesa\\": "src/"
     }
   }
 }
