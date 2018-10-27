@@ -139,7 +139,7 @@ class Mpesa
      * @param $QueueTimeOutURL | The timeout end-point that receives a timeout response.
      * @param $ResultURL | The end-point that receives the response of the transaction
      * @param $Occasion | 	Optional
-     * @return string
+     * @return mixed|string
      */
     public static function b2c($InitiatorName, $SecurityCredential, $CommandID, $Amount, $PartyA, $PartyB, $Remarks, $QueueTimeOutURL, $ResultURL, $Occasion){
         $environment=env("MPESA_ENV");
