@@ -181,7 +181,7 @@ class Mpesa
 
         $curl_response = curl_exec($curl);
 
-        return json_encode($curl_response);
+        return $curl_response;
 
     }
     /**
