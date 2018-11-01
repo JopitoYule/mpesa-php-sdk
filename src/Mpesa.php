@@ -69,66 +69,6 @@ class Mpesa
     }
 
     /**
-     * Use this function to initiate a reversal request
-     * @param $CommandID | Takes only 'TransactionReversal' Command id
-     * @param $Initiator | The name of Initiator to initiating  the request
-     * @param $SecurityCredential | 	Encrypted Credential of user getting transaction amount
-     * @param $TransactionID | Unique Id received with every transaction response.
-     * @param $Amount | Amount
-     * @param $ReceiverParty | Organization /MSISDN sending the transaction
-     * @param $RecieverIdentifierType | Type of organization receiving the transaction
-     * @param $ResultURL | The path that stores information of transaction
-     * @param $QueueTimeOutURL | The path that stores information of time out transaction
-     * @param $Remarks | Comments that are sent along with the transaction.
-     * @param $Occasion | 	Optional Parameter
-     * @return mixed|string
-     */
-    public static function reversal($CommandID, $Initiator, $SecurityCredential, $TransactionID, $Amount, $ReceiverParty, $RecieverIdentifierType, $ResultURL, $QueueTimeOutURL, $Remarks, $Occasion){
-        $environment=env("MPESA_ENV");
-
-        if( $environment =="live"){
-            $url = 'https://api.safaricom.co.ke/mpesa/reversal/v1/request';
-            $token=self::generateLiveToken();
-        }elseif ($environment=="sandbox"){
-            $url = 'https://sandbox.safaricom.co.ke/mpesa/reversal/v1/request';
-            $token=self::generateSandBoxToken();
-        }else{
-            return json_encode(["Message"=>"invalid application status"]);
-        }
-
-
-
-        $curl = curl_init();
-
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Authorization:Bearer '.$token));
-
-
-        $curl_post_data = array(
-            'CommandID' => $CommandID,
-            'Initiator' => $Initiator,
-            'SecurityCredential' => $SecurityCredential,
-            'TransactionID' => $TransactionID,
-            'Amount' => $Amount,
-            'ReceiverParty' => $ReceiverParty,
-            'RecieverIdentifierType' => $RecieverIdentifierType,
-            'ResultURL' => $ResultURL,
-            'QueueTimeOutURL' => $QueueTimeOutURL,
-            'Remarks' => $Remarks,
-            'Occasion' => $Occasion
-        );
-
-        $data_string = json_encode($curl_post_data);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($curl, CURLOPT_HEADER, false);
-        $curl_response = curl_exec($curl);
-        return json_decode($curl_response);
-
-    }
-
-    /**
      * @param $InitiatorName | 	This is the credential/username used to authenticate the transaction request.
      * @param $SecurityCredential | Encrypted password for the initiator to autheticate the transaction request
      * @param $CommandID | Unique command for each transaction type e.g. SalaryPayment, BusinessPayment, PromotionPayment
@@ -340,62 +280,6 @@ class Mpesa
 
 
         return $curl_response;
-    }
-
-
-    /**
-     * Use this function to initiate a B2B request
-     * @param $Initiator | This is the credential/username used to authenticate the transaction request.
-     * @param $SecurityCredential | Encrypted password for the initiator to autheticate the transaction request.
-     * @param $Amount | Base64 encoded string of the B2B short code and password, which is encrypted using M-Pesa public key and validates the transaction on M-Pesa Core system.
-     * @param $PartyA | Organization’s short code initiating the transaction.
-     * @param $PartyB | Organization’s short code receiving the funds being transacted.
-     * @param $Remarks | Comments that are sent along with the transaction.
-     * @param $QueueTimeOutURL | The path that stores information of time out transactions.it should be properly validated to make sure that it contains the port, URI and domain name or publicly available IP.
-     * @param $ResultURL | The path that receives results from M-Pesa it should be properly validated to make sure that it contains the port, URI and domain name or publicly available IP.
-     * @param $AccountReference | Account Reference mandatory for “BusinessPaybill” CommandID.
-     * @param $commandID | Unique command for each transaction type, possible values are: BusinessPayBill, MerchantToMerchantTransfer, MerchantTransferFromMerchantToWorking, MerchantServicesMMFAccountTransfer, AgencyFloatAdvance
-     * @param $SenderIdentifierType | Type of organization sending the transaction.
-     * @param $RecieverIdentifierType | Type of organization receiving the funds being transacted.
-
-     * @return mixed|string
-     */
-    public function b2b($Initiator, $SecurityCredential, $Amount, $PartyA, $PartyB, $Remarks, $QueueTimeOutURL, $ResultURL, $AccountReference, $commandID, $SenderIdentifierType, $RecieverIdentifierType){
-        $environment=env("MPESA_ENV");
-
-        if( $environment =="live"){
-            $url = 'https://api.safaricom.co.ke/mpesa/b2b/v1/paymentrequest';
-            $token=self::generateLiveToken();
-        }elseif ($environment=="sandbox"){
-            $url = 'https://sandbox.safaricom.co.ke/mpesa/b2b/v1/paymentrequest';
-            $token=self::generateSandBoxToken();
-        }else{
-            return json_encode(["Message"=>"invalid application status"]);
-        }
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Authorization:Bearer '.$token)); //setting custom header
-        $curl_post_data = array(
-            'Initiator' => $Initiator,
-            'SecurityCredential' => $SecurityCredential,
-            'CommandID' => $commandID,
-            'SenderIdentifierType' => $SenderIdentifierType,
-            'RecieverIdentifierType' => $RecieverIdentifierType,
-            'Amount' => $Amount,
-            'PartyA' => $PartyA,
-            'PartyB' => $PartyB,
-            'AccountReference' => $AccountReference,
-            'Remarks' => $Remarks,
-            'QueueTimeOutURL' => $QueueTimeOutURL,
-            'ResultURL' => $ResultURL
-        );
-        $data_string = json_encode($curl_post_data);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
-        $curl_response = curl_exec($curl);
-        return $curl_response;
-
     }
 
     /**
