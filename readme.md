@@ -3,7 +3,7 @@
 This package seeks to help php developers implement the various Mpesa APIs without much hustle. It is based on the REST API whose documentation is available on http://developer.safaricom.co.ke.
  
  **Installation using composer**<br>
- `composer require ivantoz/mpesa dev-master`<br>
+ `composer require ivantoz/mpesa`<br>
  
  
  **Configuration**<br>
@@ -46,16 +46,6 @@ This is used to check the status of transaction.
 `$mpesa= new \Ivantoz\Mpesa\Mpesa();`
 
 `$trasactionStatus=$mpesa->transactionStatus($Initiator, $SecurityCredential, $CommandID, $TransactionID, $PartyA, $IdentifierType, $ResultURL, $QueueTimeOutURL, $Remarks, $Occasion);`
-
-
-
-**B2B Payment Request**
-
-This is used to transfer funds between two companies.
-
-`$mpesa= new \Ivantoz\Mpesa\Mpesa();`
-
-`$b2bTransaction=$mpesa->b2b($ShortCode, $CommandID, $Amount, $Msisdn, $BillRefNumber );`
 
 
 
